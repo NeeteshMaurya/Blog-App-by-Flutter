@@ -1,15 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CrudMethods{
+class CrudMethods {
 
   //function
-  Future<void>addData(blogMap)async{
-    FirebaseFirestore.instance.collection("blogs").add(blogMap).catchError((e){
+  Future<void> addData(blogMap) async {
+    FirebaseFirestore.instance.collection("blogs").add(blogMap).catchError((e) {
       print(e);
     });
   }
 
-  getData()async{
+  getData() async {
     return await FirebaseFirestore.instance.collection("blogs").snapshots();
+  }
+
+  deleteData(docId){
+    FirebaseFirestore.instance.collection("blogs").doc(docId).delete().catchError((e){
+      print(e);
+    });
   }
 }
